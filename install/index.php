@@ -58,7 +58,7 @@ class your_module extends CModule
     public function InstallFiles()
     {
         // Логика копирования файлов
-        $sourcePath = $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/your.module/install/';
+        $sourcePath = $_SERVER['DOCUMENT_ROOT'] . '/local/modules/your.module/';
         $destinationPath = $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/your.module/';
     
         // Копирование файлов
