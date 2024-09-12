@@ -41,6 +41,11 @@ class your_module extends CModule
     public function InstallFiles()
     {
         // Логика копирования файлов
+        $sourcePath = $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/your.module/install/';
+        $destinationPath = $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/your.module/';
+    
+        // Копирование файлов
+        CopyDirFiles($sourcePath . 'lib', $destinationPath . 'lib', true, true);
     }
 
     public function UnInstallDB()
@@ -56,5 +61,9 @@ class your_module extends CModule
     public function UnInstallFiles()
     {
         // Логика удаления файлов
+        $path = $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/your.module/';
+
+        // Удаление файлов и директорий
+        DeleteDirFilesEx($path);
     }
 }
