@@ -6,12 +6,17 @@ class your_module extends CModule
     public function __construct()
     {
         
-        //получим путь до модуля
-            $path = str_replace("\\", "/", __FILE__);
-            $path = substr($path, 0, strlen($path) - strlen("/install/index.php"));
-
+        //Установим пути к файлам раз битрикс этого в классе не сделал
+            $this->$path = [
+                'INSTALL' => [
+                    'INDEX' => str_replace("\\", "/", __FILE__)
+                ]
+            ] ;
+            $this->$path['ROOT_MODULE'] = substr($this->$path['INSTALL']['INDEX'], 0, strlen($this->$path['INSTALL']['INDEX']) - strlen("/install/index.php"));
+            $this->$path['VERSION_FILE'] = $this->$path['ROOT_MODULE'] . '/version.php';     
+        
         //установка версии модуля
-            include($path."/version.php");
+            include($this->$path['VERSION_FILE']);
             if (is_array($arModuleVersion) && array_key_exists("VERSION", $arModuleVersion))
             {
                 $this->MODULE_VERSION = $arModuleVersion["VERSION"];
@@ -20,7 +25,7 @@ class your_module extends CModule
 
         //оставльные данные модуля
         $this->MODULE_ID = 'your.module';
-        $this->MODULE_NAME = 'Мой модуль ';
+        $this->MODULE_NAME = 'Мой модуль';
         $this->MODULE_DESCRIPTION = 'Описание модуля';
     }
 
